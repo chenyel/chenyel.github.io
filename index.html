@@ -1,256 +1,233 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>chenye</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="记录学习、项目和技术总结">
-<meta property="og:type" content="website">
-<meta property="og:title" content="chenye">
-<meta property="og:url" content="https://chenyel.github.io/index.html">
-<meta property="og:site_name" content="chenye">
-<meta property="og:description" content="记录学习、项目和技术总结">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="chenye">
-<meta property="article:tag" content="Java、SpringBoot、MySQL、Redis、AI">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="chenye" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
-<meta name="generator" content="Hexo 8.1.2"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">chenye</a>
-      </h1>
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>趁年轻 - 事果决</title><meta name="author" content="C x l"><meta name="copyright" content="C x l"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="低语中果决，成功时清醒"><meta property="og:type" content="website"><meta property="og:title" content="趁年轻"><meta property="og:url" content="https://chenyel.github.io/index.html"><meta property="og:site_name" content="趁年轻"><meta property="og:description" content="低语中果决，成功时清醒"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://chenyel.github.io/img/avatar.png"><meta property="article:author" content="C x l"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://chenyel.github.io/img/avatar.png"><link rel="shortcut icon" href="/img/favicon_my.ico"><link rel="canonical" href="https://chenyel.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>(() => {
       
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">java/大模型</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chenyel.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-      <div class="outer">
-        <section id="main">
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
-    <article id="post-2026-6-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/06/02/2026-6-2/" class="article-date">
-  <time class="dt-published" datetime="2026-06-02T13:38:43.000Z" itemprop="datePublished">2026-06-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/06/02/2026-6-2/">2026/6/2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
       
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
         
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://chenyel.github.io/2026/06/02/2026-6-2/" data-id="cuidcPpWMP5EqaR31YoIqalNb" data-title="2026/6/2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
       
-      
-      
-    </footer>
-  </div>
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
   
-</article>
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: '[object Object]',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"趁年轻",isHighlightShrink:!1,isToc:!1,pageType:"home"}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
 
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
 
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image:url(/img/background.png)"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/nav_logo.png" alt="Logo"><span class="site-name">趁年轻</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">趁年轻</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/yishuangrenew" target="_blank" title="Github"><i class="fab fa-github" style="color:#24292e"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color:#4a7dbe"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E8%A5%BF%E7%94%B52014%E7%AE%97%E6%B3%95%E9%A2%98/" title="西电2014算法题">西电2014算法题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.133Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">2014年西电算法题 时间：2025年3月6日21:06:42 start-&gt; 2025年3月6日22:31:17 -》2025年3月7日11:08:45 continue-&gt; Problem 1题目描述：编写一个程序，读入一组整数，它们的个数N也是由用户输入的，最多不会超过20。然后程序将对这个数组进行统计，把出现次数最多的那个数组元素值打印出来。如果有两个元素值出现的次数相同，即并列第一，那么只打印比较小的那个值。 输入说明：第一行是一个整数N，N&lt;&#x3D;20；接下来有N行，每一行表示一个整数。 输出说明：输出只有一行，即出现次数最多的那个元素值。 输入样本： 610 12 13 2 12 10 输出样本： 10 代码： 1234567891011121314151617181920212223242526#include &lt;stdio.h&gt;#include &lt;unordered_map&gt;using namespace std;int main() &#123; int n, num; ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E7%AC%AC01%E6%AC%A1CCF%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/" title="第01次CCF软件能力认证">第01次CCF软件能力认证</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.130Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">第01次CCF软件能力认证 CCF-CSP考试复习准备资料汇总（同样适用于所有算法比赛，程序设计竞赛），超级详细，超级全面！容器篇（文章包含所有常见容器及其常用函数）_csp资料-CSDN博客 时间:2025年3月21日20:11:46 start-&gt; 链接：TUOJ (thusaac.com) 相反数时间：2025年3月21日20:14:27 start-&gt; 2025年3月21日20:22:52 ok 时间限制： 1.0 秒 空间限制： 256 MB 问题描述有 N 个非零且各不相同的整数。请你编一个程序求出它们中有多少对相反数(a 和 -a 为一对相反数)。 输入格式第一行包含一个正整数 N。(1 ≤ N ≤ 500)。 第二行为 N 个用单个空格隔开的非零整数,每个数的绝对值不超过1000,保证这些整数各不相同。 输出格式只输出一个整数,即这 N 个数中包含多少对相反数。 样例输入1251 2 3 -1...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E6%97%B6%E9%97%B4%EF%BC%9A2025%E5%B9%B43%E6%9C%8817%E6%97%A5210029/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.126Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">时间：2025年3月17日21:00:29 1.智能指针的实现 2.linux的shutdown命令 3.图灵机 4.毕设的东西 5.拿了国奖项目做的什么 6.分享一段代码实现了什么功能。 7.什么是快速排序 8.普通变量和类变量的区别。 9.线代相关题目。 10.毕设，有什么获奖。 11.递归与迭代的区别。 12.介绍项目 12.英语问题，谈一下你的家乡。 13.介绍项目。 14.面试时候问了组成原理的OMA。 15.软件工程导论的模块与模块之间还有模块内部应该怎样。</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2024%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2024西电机试算法题">2024西电机试算法题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.121Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">2024西电机试算法题 时间：2025年3月16日22:26:00 start-&gt; Problem 1题目描述：输入两个数字m和n分别表示矩阵的行数和列数量。之后再输入m行n列的数字，表示初始矩阵。接着再对矩阵进行“归一化”操作。 ​	归一化的操作如下：对于矩阵中每一个元素x，将元素转化为x‘&#x3D;(x-min)&#x2F;(max-min)。其中，max和min分别表示矩阵中所有元素的最大值和最小值。接着再对矩阵进行“镜像化”操作。“镜像化”操作即为将元素进行镜像反转。如下所示： 123 321 456	-》 654 789 987 输入格式：输入两个数字m和n，表示m行n列 输入m行n列的整数，表示矩阵。 输入数据保证1&lt;=m，n&lt;=10。 输出格式：输出经过处理之后的m行n列的矩阵。输出数据时，要求数据保留三位小数。 示例：输入数据： 2 2 0 2 2 0 输出： 1.000 0.000 0.000 1.000 解释： 原矩阵为 0 2 2 0 进行归一化之后，矩阵变为： 0 1 1 0 进行镜像化之后，矩阵变为： 1 0 0...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2023%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2023西电机试算法题">2023西电机试算法题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.118Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">2023西电机试算法题 时间：2025年3月9日13:59:13 start-&gt; Problem 1题目描述：西电近期举办了一次编程比赛，参加比赛的选手有3*n个选手，每个选手都有一个水平值a_i。现在要将这些选手进行组队，一共组成n个队伍，即每个队伍3人。老师发现队伍的水平值等于该队伍队员的第二高水平值。 一个队伍三个队员的水平值分别是3,3,3，那么队伍的水平值是3； 一个队伍三个队员的水平值分别是3,2,3，那么队伍的水平值是3； 一个队伍三个队员的水平值分别是1,5,2，那么队伍的水平值是2。 ​	为了让比赛更有看点，老师就想安排队伍使所有队伍的水平值总和最大。 输入描述：输入的第一行为一个正整数n（1&lt;&#x3D;n&lt;&#x3D;10^5^），输入的第二行包括3*n个整数a_i（1&lt;&#x3D;a_i&lt;&#x3D;10^9^），表示每个参赛选手的水平值。 输出描述：输出一个整数表示所有队伍的水平值总和最大值。 样例输入： 2 5 2 8 5 1...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2019%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2019西电机试算法题">2019西电机试算法题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.115Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">2019西电机试算法题 Problem 1题目描述：任意给定n个整数，求这n个整数序列的和、最小值、最大值。 输入描述：输入一个整数n，代表接下来输入整数的个数，0&lt;n&lt;&#x3D;100，接着输入n个整数，整数用int表示即可。 输出描述：输出整数序列的和、最小值、最大值。用空格隔开，占一行。 代码：如下： 1234567891011121314151617#include&lt;cstdio&gt;#include&lt;climits&gt;using namespace std;int main()&#123;	int n;	scanf(&quot;%d&quot;,&amp;n);	int sum=0,mx=INT_MIN,mn=INT_MAX;	int num;	for(int i=0;i&lt;n;++i)&#123; scanf(&quot;%d&quot;,&amp;num); sum+=num; mx=max(mx,num); mn=min(mn,num);	&#125;	printf(&quot;%d %d...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2018%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2018西电机试算法题">2018西电机试算法题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.111Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">2018西电机试算法题 时间：2025年3月18日11:39:57 start-&gt; Problem 1题目描述：最近很火的微信游戏跳一跳游戏规则如下：短跳得1分，跌落游戏结束，长跳得2分，并且长跳可连续累加，第一次2分，第二次4分，依次类推，若长中断则重新计数2分。 ​	现给定0,1,2的组合序列，其中0：跌落；1：短跳成功；2：长跳成功。 ​	请你计算玩家当前游戏的合计得分。 输入格式：首先输入一个数字n代表当前游戏状态变化数，接着输入n个由0,1,2组合的数字，0代表结束。 输出格式：输出玩家档次游戏得分。 样例输入： 6 1 2 2 1 2 0 样例输出： 10 样例解释： 1+2+4+1+2+0&#x3D;10 算法思路： 遍历序列：若数字为1，+1；若数字为2，+2【+4】；若数字为0；退出（不接受后面的数字了） 代码：如下： 1234567891011121314151617181920212223#include&lt;cstdio&gt;using namespace std;int main()&#123;	int n; // 状态变化数	int...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2017%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2017西电机试算法题">2017西电机试算法题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.106Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">2017西电机试算法题 时间：2025年3月17日19:55:38 start-&gt; Problem 1题目描述：在一个整体序列a1，a2，……，an中，如果存在某个数，大于它的整数数量等于小于它的整体数量，则称其为中间数。在一个序列中，可能存在多个下标不相同的中间数，这些中间数的值是相同的。 ​	给定一个整数数列，请找出这个整数序列的中间数的值。 输入格式：输入的第一行包含了一个整数n，表示整数序列中数的个数。 ​	第二行包含n个正整数，依次表示a1，a2，……，an。 输出格式：如果约定序列的中间数存在，则输出中间数的值，否则输出-1表示不存在中间数。 样例输入：如下 6 2 6 5 6 3 5 样例输出：如下 5 样例说明：比5小的数由2个，比5大的数也有2个。 样例输入：如下 4 3 4 6 7 样例输出：如下 -1 样例说明：在序列中的4个数都不满足中间数的定义。 代码：如下 1234#include&lt;cstdio&gt;using namespace std; Problem...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2016%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2016西电机试算法题">2016西电机试算法题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.103Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">2016西电机试算法题</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2015%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98221/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-06-02T14:22:06.101Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></span></div><div class="content">2017操作系统1.不是分时系统的基本特征的是（实时性）。【同时性、独立性、交互性】 2.特权指令只允许操作系统使用。 3.（等待态）也称为阻塞态。 4.动态重定位方式装入的作业在执行中允许操作系统有条件地将其移动。 5.分也是存储管理中，地址转换工作由硬件完成， 6.操作系统的四大功能：处理器管理、存储器管理、设备管理。文件管理、进程管理。 7.进程的结构：程序段、数据段、PCB 进程的特点：结构特征、动态性、并发性、独立性、异步性、 基本状态：就绪、执行、阻塞 计算机网络1.MAC地址存储在网卡上。 2.tigongyuanchengguanliwangluoshebeigongnengdewangluoguanlibiaozhu（SNMP）简单网络管理协议。 3.个人区域网、局域网、城域网、广域网 PAN LAN MAN WAN 4.计算机网络分为通信子网和资源子网。 5.带通调制方法有：调幅AM、调频FM和调相PM。 6.DNS:域名-&gt;IP 7.非对称数字用户线路：ADSL 8.物理层 数据链路层 网络层 传输层 会话层 表示层 应用层 网络接口层 忘记层...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info-name">C x l</div><div class="author-info-description">低语中果决，成功时清醒</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yishuangrenew"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/yishuangrenew" target="_blank" title="Github"><i class="fab fa-github" style="color:#24292e"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color:#4a7dbe"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎进行算法、技术交流</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E8%A5%BF%E7%94%B52014%E7%AE%97%E6%B3%95%E9%A2%98/" title="西电2014算法题">西电2014算法题</a><time datetime="2026-06-02T14:22:06.133Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E7%AC%AC01%E6%AC%A1CCF%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/" title="第01次CCF软件能力认证">第01次CCF软件能力认证</a><time datetime="2026-06-02T14:22:06.130Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E6%97%B6%E9%97%B4%EF%BC%9A2025%E5%B9%B43%E6%9C%8817%E6%97%A5210029/" title="无标题">无标题</a><time datetime="2026-06-02T14:22:06.126Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2024%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2024西电机试算法题">2024西电机试算法题</a><time datetime="2026-06-02T14:22:06.121Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2023%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2023西电机试算法题">2023西电机试算法题</a><time datetime="2026-06-02T14:22:06.118Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline"><i class="fas fa-folder-open"></i> <span>分类</span></div><ul class="card-category-list" id="aside-cat-list"><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/CCF-CSP/"><span class="card-category-list-name">CCF CSP</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/XXXXX/"><span class="card-category-list-name">XXXXX</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/notes/"><span class="card-category-list-name">notes</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/touchstone/"><span class="card-category-list-name">touchstone</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/%E4%BB%8A%E6%97%A5%E4%BB%BB%E5%8A%A1/"><span class="card-category-list-name">今日任务</span><span class="card-category-list-count">1</span></a></li></ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/CCF-CSP/" style="font-size:1.3em;color:#99a1ac">CCF CSP</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size:1.1em;color:#999">碎碎念</a> <a href="/tags/markdown%E6%B7%B1%E5%85%A5/" style="font-size:1.1em;color:#999">markdown深入</a> <a href="/tags/C-C-Linux-%E4%BB%A3%E7%A0%81/" style="font-size:1.1em;color:#999">C/C++ Linux 代码</a> <a href="/tags/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95/" style="font-size:1.5em;color:#99a9bf">考研复试</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i> <span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026 </span><span class="card-archive-list-count">14</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/03/"><span class="card-archive-list-date">三月 2025 </span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025 </span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022 </span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">22</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">46.4k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2026-06-02T14:24:05.482Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By C x l</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')</script><script>function subtitleType(){typedJSFn.init(["斩断昔日旧枷锁&#44今日方知我是我"])}typedJSFn.run(subtitleType)</script></div><div class="aplayer no-destroy" data-id="772394587" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrctype="-1"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!0,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
 
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/06/02/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2026-06-02T13:34:46.492Z" itemprop="datePublished">2026-06-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/06/02/hello-world/">Hello World</a>
-    </h1>
-  
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://chenyel.github.io/2026/06/02/hello-world/" data-id="cuidoiFirz35LHoyT3llmf488" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
 
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
 
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
 
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/06/">六月 2026</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/06/02/2026-6-2/">2026/6/2</a>
-          </li>
-        
-          <li>
-            <a href="/2026/06/02/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 chenye<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>第01次CCF软件能力认证 | 趁年轻</title><meta name="author" content="C x l"><meta name="copyright" content="C x l"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="第01次CCF软件能力认证 CCF-CSP考试复习准备资料汇总（同样适用于所有算法比赛，程序设计竞赛），超级详细，超级全面！容器篇（文章包含所有常见容器及其常用函数）_csp资料-CSDN博客 时间:2025年3月21日20:11:46 start-&gt;  链接：TUOJ (thusaac.com)  相反数时间：2025年3月21日20:14:27 start-&gt; 2025年3月21日"><meta property="og:type" content="article"><meta property="og:title" content="第01次CCF软件能力认证"><meta property="og:url" content="https://chenyel.github.io/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E7%AC%AC01%E6%AC%A1CCF%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/index.html"><meta property="og:site_name" content="趁年轻"><meta property="og:description" content="第01次CCF软件能力认证 CCF-CSP考试复习准备资料汇总（同样适用于所有算法比赛，程序设计竞赛），超级详细，超级全面！容器篇（文章包含所有常见容器及其常用函数）_csp资料-CSDN博客 时间:2025年3月21日20:11:46 start-&gt;  链接：TUOJ (thusaac.com)  相反数时间：2025年3月21日20:14:27 start-&gt; 2025年3月21日"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://chenyel.github.io/img/avatar.png"><meta property="article:published_time" content="2026-06-02T14:22:06.130Z"><meta property="article:modified_time" content="2025-03-21T12:32:17.784Z"><meta property="article:author" content="C x l"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://chenyel.github.io/img/avatar.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "第01次CCF软件能力认证",
+  "url": "https://chenyel.github.io/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E7%AC%AC01%E6%AC%A1CCF%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/",
+  "image": "https://chenyel.github.io/img/avatar.png",
+  "datePublished": "2026-06-02T14:22:06.130Z",
+  "dateModified": "2025-03-21T12:32:17.784Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "C x l",
+      "url": "https://chenyel.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon_my.ico"><link rel="canonical" href="https://chenyel.github.io/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E7%AC%AC01%E6%AC%A1CCF%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>(() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: '[object Object]',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"第01次CCF软件能力认证",isHighlightShrink:!1,isToc:!0,pageType:"post"}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(/img/default_top_img.png)"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/nav_logo.png" alt="Logo"><span class="site-name">趁年轻</span></a><a class="nav-page-title" href="/"><span class="site-name">第01次CCF软件能力认证</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">第01次CCF软件能力认证</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-06-02T14:22:06.130Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-21T12:32:17.784Z" title="更新于 2025-03-21 20:32:17">2025-03-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><strong>第01次CCF软件能力认证</strong></p><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wbwkwb/article/details/139473649">CCF-CSP考试复习准备资料汇总（同样适用于所有算法比赛，程序设计竞赛），超级详细，超级全面！容器篇（文章包含所有常见容器及其常用函数）_csp资料-CSDN博客</a></p><p>时间:2025年3月21日20:11:46 start-&gt;</p><p>链接：<a target="_blank" rel="noopener" href="https://sim.csp.thusaac.com/contest/1/home">TUOJ (thusaac.com)</a></p><hr><h1 id="相反数"><a href="#相反数" class="headerlink" title="相反数"></a>相反数</h1><p>时间：2025年3月21日20:14:27 start-&gt; 2025年3月21日20:22:52 ok</p><p><strong>时间限制：</strong> 1.0 秒</p><p><strong>空间限制：</strong> 256 MB</p><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>有 N 个非零且各不相同的整数。请你编一个程序求出它们中有多少对相反数(a 和 -a 为一对相反数)。</p><h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行包含一个正整数 N。(1 ≤ N ≤ 500)。</p><p>第二行为 N 个用单个空格隔开的非零整数,每个数的绝对值不超过1000,保证这些整数各不相同。</p><h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>只输出一个整数,即这 N 个数中包含多少对相反数。</p><h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">1 2 3 -1 -2</span><br></pre></td></tr></table></figure><h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    set&lt;<span class="type">int</span>&gt; st;</span><br><span class="line">    <span class="type">int</span> num,cnt=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">		<span class="keyword">if</span>(st.<span class="built_in">count</span>(-num))&#123;</span><br><span class="line">			++cnt; <span class="comment">// 因为各不相同，所以找到了不用插入st</span></span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			st.<span class="built_in">insert</span>(num);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,cnt);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="窗口"><a href="#窗口" class="headerlink" title="窗口"></a>窗口</h1><p>时间：2025年3月21日20:23:39 start-&gt;</p><p><strong>时间限制：</strong> 1.0 秒</p><p><strong>空间限制：</strong> 256 MB</p><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>在某图形操作系统中,有 N 个窗口,每个窗口都是一个两边与坐标轴分别平行的矩形区域。窗口的边界上的点也属于该窗口。窗口之间有层次的区别,在多于一个窗口重叠的区域里,只会显示位于顶层的窗口里的内容。</p><p>当你点击屏幕上一个点的时候,你就选择了处于被点击位置的最顶层窗口,并且这个窗口就会被移到所有窗口的最顶层,而剩余的窗口的层次顺序不变。如果你点击的位置不属于任何窗口,则系统会忽略你这次点击。</p><p>现在我们希望你写一个程序模拟点击窗口的过程。</p><h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入的第一行有两个正整数,即 N 和 M。(1 ≤ N ≤ 10,1 ≤ M ≤ 10)</p><p>接下来 N 行按照从最下层到最顶层的顺序给出 N 个窗口的位置。 每行包含四个非负整数 x1, y1, x2, y2,表示该窗口的一对顶点坐标分别为 (x1, y1) 和 (x2, y2)。保证 x1&lt;x2 , y1&lt;y2。</p><p>接下来 M 行每行包含两个非负整数 x, y,表示一次鼠标点击的坐标。</p><p>题目中涉及到的所有点和矩形的顶点的 x, y 坐标分别不超过 2559 和 1439。</p><h2 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出包括 M 行,每一行表示一次鼠标点击的结果。如果该次鼠标点击选择了一个窗口,则输出这个窗口的编号(窗口按照输入中的顺序从 1 编号到 N);如果没有,则输出”IGNORED”(不含双引号)。</p><h2 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入"></a>样例输入</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">3 4</span><br><span class="line">0 0 4 4</span><br><span class="line">1 1 5 5</span><br><span class="line">2 2 6 6</span><br><span class="line">1 1</span><br><span class="line">0 0</span><br><span class="line">4 4</span><br><span class="line">0 5</span><br></pre></td></tr></table></figure><h2 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出"></a>样例输出</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">IGNORED</span><br></pre></td></tr></table></figure><h2 id="样例说明"><a href="#样例说明" class="headerlink" title="样例说明"></a>样例说明</h2><p>第一次点击的位置同时属于第 1 和第 2 个窗口,但是由于第 2 个窗口在上面,它被选择并且被置于顶层。</p><p>第二次点击的位置只属于第 1 个窗口,因此该次点击选择了此窗口并将其置于顶层。现在的三个窗口的层次关系与初始状态恰好相反了。</p><p>第三次点击的位置同时属于三个窗口的范围,但是由于现在第 1 个窗口处于顶层,它被选择。</p><p>最后点击的 (0, 5) 不属于任何窗口。</p><h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">int main()&#123;</span><br><span class="line">	int N,M;</span><br><span class="line">	for(int i=0;i&lt;M)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://chenyel.github.io">C x l</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://chenyel.github.io/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E7%AC%AC01%E6%AC%A1CCF%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/">https://chenyel.github.io/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E7%AC%AC01%E6%AC%A1CCF%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://chenyel.github.io" target="_blank">趁年轻</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info-name">C x l</div><div class="author-info-description">低语中果决，成功时清醒</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yishuangrenew"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/yishuangrenew" target="_blank" title="Github"><i class="fab fa-github" style="color:#24292e"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color:#4a7dbe"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎进行算法、技术交流</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%8F%8D%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">相反数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%85%A5"><span class="toc-number">1.4.</span> <span class="toc-text">样例输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%87%BA"><span class="toc-number">1.5.</span> <span class="toc-text">样例输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3"><span class="toc-number">1.6.</span> <span class="toc-text">题解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3"><span class="toc-number">2.</span> <span class="toc-text">窗口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">2.2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">2.3.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%85%A5-1"><span class="toc-number">2.4.</span> <span class="toc-text">样例输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%BE%93%E5%87%BA-1"><span class="toc-number">2.5.</span> <span class="toc-text">样例输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-number">2.6.</span> <span class="toc-text">样例说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="toc-number">2.7.</span> <span class="toc-text">题解</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E8%A5%BF%E7%94%B52014%E7%AE%97%E6%B3%95%E9%A2%98/" title="西电2014算法题">西电2014算法题</a><time datetime="2026-06-02T14:22:06.133Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E7%AC%AC01%E6%AC%A1CCF%E8%BD%AF%E4%BB%B6%E8%83%BD%E5%8A%9B%E8%AE%A4%E8%AF%81/" title="第01次CCF软件能力认证">第01次CCF软件能力认证</a><time datetime="2026-06-02T14:22:06.130Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/%E6%97%B6%E9%97%B4%EF%BC%9A2025%E5%B9%B43%E6%9C%8817%E6%97%A5210029/" title="无标题">无标题</a><time datetime="2026-06-02T14:22:06.126Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2024%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2024西电机试算法题">2024西电机试算法题</a><time datetime="2026-06-02T14:22:06.121Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/02/%E8%A5%BF%E7%94%B5%E7%AE%97%E6%B3%95%E9%A2%98_%E8%BF%98%E6%9C%AA%E4%B8%8A%E4%BC%A0/2023%E8%A5%BF%E7%94%B5%E6%9C%BA%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="2023西电机试算法题">2023西电机试算法题</a><time datetime="2026-06-02T14:22:06.118Z" title="发表于 2026-06-02 22:22:06">2026-06-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By C x l</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="772394587" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrctype="-1"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!0,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
