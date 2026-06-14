@@ -1,0 +1,138 @@
+<%
+	const tagTree = build_tag_tree(site);
+	const featuredTagSlug = tagTree.featuredTagSlug;
+%>
+<article class="post post-full card bg-white shadow-sm border-0 lq-tag-tree-page" data-tag-tree>
+	<div class="lq-tag-tree-page__aurora" aria-hidden="true"></div>
+	<header class="lq-tag-tree-page__hero">
+		<div class="lq-tag-tree-page__intro">
+			<span class="lq-tag-tree-page__eyebrow">Tech Constellation</span>
+			<h1 class="lq-tag-tree-page__title">标签技能树</h1>
+			<p class="lq-tag-tree-page__copy">
+				把博客里不断生长的技术栈、笔记和阶段主题，整理成一张可以探索的发光知识树。
+				挨近某片叶子时，它会被点亮；点开之后，你能直接看到这组内容的最近文章。
+			</p>
+		</div>
+		<div class="lq-tag-tree-page__stats" role="list" aria-label="Tag statistics">
+			<div class="lq-tag-tree-stat" role="listitem">
+				<span class="lq-tag-tree-stat__value"><%= tagTree.totalTags %></span>
+				<span class="lq-tag-tree-stat__label">标签节点</span>
+			</div>
+			<div class="lq-tag-tree-stat" role="listitem">
+				<span class="lq-tag-tree-stat__value"><%= tagTree.totalBranches %></span>
+				<span class="lq-tag-tree-stat__label">主枝簇群</span>
+			</div>
+			<div class="lq-tag-tree-stat" role="listitem">
+				<span class="lq-tag-tree-stat__value"><%= tagTree.totalTaggedPosts %></span>
+				<span class="lq-tag-tree-stat__label">关联文章</span>
+			</div>
+		</div>
+	</header>
+
+	<% if (tagTree.tags.length === 0) { %>
+		<div class="lq-tag-tree-empty">
+			<h2>这里还没有长出标签叶片</h2>
+			<p>给文章补上 tags 后，这个页面会自动生成一棵新的知识树。</p>
+		</div>
+	<% } else { %>
+		<div class="lq-tag-tree-layout">
+			<section class="lq-tag-tree-canopy" aria-label="Interactive tag tree">
+				<div class="lq-tag-tree-canopy__mist" aria-hidden="true"></div>
+				<div class="lq-tag-tree-trunk" aria-hidden="true">
+					<span class="lq-tag-tree-trunk__core"></span>
+					<span class="lq-tag-tree-trunk__halo"></span>
+				</div>
+
+				<div class="lq-tag-tree-branches">
+					<% tagTree.branches.forEach(function(branch, branchIndex){ %>
+						<section
+							class="lq-tag-branch lq-tag-branch--<%= branch.side %>"
+							data-branch-id="<%= branch.id %>"
+							style="--branch-hue:<%= branch.hue %>;"
+						>
+							<div class="lq-tag-branch__line" aria-hidden="true"></div>
+							<div class="lq-tag-branch__meta">
+								<span class="lq-tag-branch__kicker">Cluster 0<%= branchIndex + 1 %></span>
+								<h2 class="lq-tag-branch__name"><%= branch.label %></h2>
+								<p class="lq-tag-branch__summary"><%= branch.summary %></p>
+							</div>
+
+							<div class="lq-tag-branch__leaves">
+								<% branch.tags.forEach(function(tag){ %>
+									<button
+										type="button"
+										class="lq-tag-leaf <%= featuredTagSlug === tag.slug ? 'is-active' : '' %>"
+										data-tag-target="<%= tag.slug %>"
+										data-branch-target="<%= branch.id %>"
+										aria-pressed="<%= featuredTagSlug === tag.slug ? 'true' : 'false' %>"
+										style="--leaf-size:<%= tag.size %>px;--leaf-glow:<%= tag.emphasis %>;"
+									>
+										<span class="lq-tag-leaf__flare" aria-hidden="true"></span>
+										<span class="lq-tag-leaf__name"><%= tag.name %></span>
+										<span class="lq-tag-leaf__count"><%= tag.count %></span>
+									</button>
+								<% }) %>
+							</div>
+						</section>
+					<% }) %>
+				</div>
+			</section>
+
+			<aside class="lq-tag-tree-detail" aria-live="polite">
+				<div class="lq-tag-tree-detail__shell">
+					<div class="lq-tag-tree-detail__label">Leaf Preview</div>
+					<% tagTree.tags.forEach(function(tag){ %>
+						<section
+							class="lq-tag-tree-panel <%= featuredTagSlug === tag.slug ? 'is-active' : '' %>"
+							data-tag-panel="<%= tag.slug %>"
+							data-branch-panel="<%= tag.branchId %>"
+						>
+							<header class="lq-tag-tree-panel__header">
+								<div>
+									<span class="lq-tag-tree-panel__branch"><%= tag.branchLabel %></span>
+									<h2 class="lq-tag-tree-panel__title"><%= tag.name %></h2>
+								</div>
+								<div class="lq-tag-tree-panel__badge"><%= tag.count %> 篇</div>
+							</header>
+
+							<% if (tag.categories.length) { %>
+								<div class="lq-tag-tree-panel__chips">
+									<% tag.categories.slice(0, 4).forEach(function(category){ %>
+										<span class="lq-tag-tree-panel__chip"><%= category %></span>
+									<% }) %>
+								</div>
+							<% } %>
+
+							<div class="lq-tag-tree-panel__posts">
+								<% tag.posts.forEach(function(post){ %>
+									<a class="lq-tag-tree-post" href="<%= post.url %>">
+										<div class="lq-tag-tree-post__meta"><%= post.date %></div>
+										<div class="lq-tag-tree-post__title"><%= post.title %></div>
+										<p class="lq-tag-tree-post__excerpt"><%= post.excerpt %></p>
+									</a>
+								<% }) %>
+							</div>
+
+							<div class="lq-tag-tree-panel__actions">
+								<a class="btn btn-primary btn-sm" href="<%= tag.url %>">查看全部</a>
+							</div>
+						</section>
+					<% }) %>
+				</div>
+			</aside>
+		</div>
+
+		<script class="lq-tag-tree-data" type="application/json"><%- JSON.stringify({
+			featuredTagSlug: tagTree.featuredTagSlug,
+			branches: tagTree.branches.map(function(branch){
+				return {
+					id: branch.id,
+					label: branch.label,
+					tags: branch.tags.map(function(tag){
+						return tag.slug;
+					})
+				};
+			})
+		}) %></script>
+	<% } %>
+</article>

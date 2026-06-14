@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Hexo generated / cache
+db.json
+public/
+.deploy*/
+.tmp/
+
+# Dependencies
+node_modules/
+.npm-cache/
+
+# Logs
+*.log
+
+# Local-only multi config
+_multiconfig.yml

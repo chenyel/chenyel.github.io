@@ -1,0 +1,19 @@
+<div id="post_comment" class="card shadow-sm border-0 lq-comment-shell">
+	<div class="lq-comment-shell__header">
+		<h3>评论区</h3>
+		<span>欢迎留下你的想法</span>
+	</div>
+	<div class="lq-comment-shell__body">
+		<% if (theme.gitalk.enable) { %>
+			<%- partial('_comment/gitalk') %>
+		<% } else if (theme.giscus.enable) { %>
+			<%- partial('_comment/giscus') %>
+		<% } else if (theme.waline.enable) { %>
+			<%- partial('_comment/waline') %>
+		<% } else if (theme.twikoo.enable) { %>
+			<%- partial('_comment/twikoo') %>
+		<% } else { %>
+			<p class="lq-comment-shell__empty">评论系统还没有接入配置，界面已经预留好了。</p>
+		<% } %>
+	</div>
+</div>

@@ -1,0 +1,251 @@
+<% if (post.lq_tech_map_page) { %>
+	<%- include('tech-constellation-page', { constellation: build_tech_constellation(theme) }) %>
+<% } else if (post.lq_music_page) { %>
+	<%
+		let music_playlists = Array.isArray(theme.music_featured_playlists) ? theme.music_featured_playlists.filter(function (item) {
+			return item && item.id;
+		}) : [];
+		let fallback_playlist_id = music_playlists.length ? music_playlists[0].id : '';
+		let music_api_base_url = theme.music_api_base_url || '';
+		let music_intro = theme.music_page_intro || '';
+		let music_page_content = (post.content || '').trim();
+	%>
+	<article class="post post-full card bg-white shadow-sm border-0 lq-page-card lq-music-page <%= theme.enable_into_article_animation ? 'post-preview' : '' %>">
+		<section
+			class="lq-music-hero"
+			data-music-api-base="<%= music_api_base_url %>"
+			data-default-playlist-id="<%= fallback_playlist_id %>"
+		>
+			<div class="lq-music-stage">
+				<div class="lq-music-hero__aurora" aria-hidden="true"></div>
+				<div class="lq-music-stage__player" data-lq-music-state>
+					<div class="lq-music-hero__player-shell">
+						<div class="lq-music-hero__copy">
+							<p class="lq-music-kicker">正在播放</p>
+							<h1 class="lq-music-title"><%= post.title %></h1>
+							<p class="lq-music-intro"><%= music_intro %></p>
+							<a class="lq-music-player-jump" data-music-player-jump href="#music-playlists">看看下面的歌单</a>
+						</div>
+						<div class="lq-music-player-main">
+							<div class="lq-music-player-cover-wrap">
+								<img class="lq-music-player-cover" data-music-cover src="/img/nav_logo.png" alt="music cover">
+							</div>
+							<div class="lq-music-player-stack">
+								<p class="lq-music-player-label">点击播放就开始</p>
+								<h2 class="lq-music-player-title">把今天想听的歌放在这里</h2>
+								<p class="lq-music-player-copy">切歌、看歌词、整理最近循环的声音，都在这一页完成。</p>
+								<div class="lq-music-player-progress">
+									<input class="lq-music-player-range" type="range" min="0" max="100" value="0" step="0.1" data-music-progress>
+									<div class="lq-music-player-times">
+										<span data-music-current-time>00:00</span>
+										<span data-music-duration>00:00</span>
+									</div>
+								</div>
+								<div class="lq-music-player-controls">
+									<div class="lq-music-player-buttons">
+										<button class="lq-music-control" type="button" data-music-action="prev" aria-label="上一首">
+											<i class="fa fa-step-backward" aria-hidden="true"></i>
+										</button>
+										<button class="lq-music-control lq-music-control--primary" type="button" data-music-action="toggle" aria-label="播放或暂停">
+											<i class="fa fa-play" aria-hidden="true"></i>
+										</button>
+										<button class="lq-music-control" type="button" data-music-action="next" aria-label="下一首">
+											<i class="fa fa-step-forward" aria-hidden="true"></i>
+										</button>
+									</div>
+								</div>
+								<audio class="lq-music-audio" data-music-audio preload="none"></audio>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="lq-music-stage__lyrics" data-music-lyrics-stage>
+					<div class="lq-music-stage__lyrics-head">
+						<p class="lq-music-kicker">歌词舞台</p>
+						<h2 class="lq-music-stage__lyrics-title">旋律响起来后，这里会同步亮起当前歌词。</h2>
+					</div>
+					<div class="lq-music-lyrics" data-music-lyrics>
+						<p class="lq-music-lyrics__placeholder">播放开始后，这里会跟着当前歌曲一起显示歌词。</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="lq-music-console">
+			<div class="lq-music-tabs" role="tablist" aria-label="音乐面板">
+				<button class="lq-music-tab is-active" type="button" data-music-tab="playlist">歌单</button>
+				<button class="lq-music-tab" type="button" data-music-tab="queue">曲目</button>
+			</div>
+			<div class="lq-music-panels">
+				<div class="lq-music-panel is-active" data-music-panel="playlist">
+					<div class="lq-music-playlists" id="music-playlists" data-music-playlists>
+						<% if (music_playlists.length) { %>
+							<% music_playlists.forEach(function (playlist, index) { %>
+								<a
+									class="lq-music-card<%= index === 0 ? ' is-active' : '' %>"
+									href="#music-playlists"
+									data-playlist-id="<%= playlist.id %>"
+									data-playlist-title="<%= playlist.title || ('歌单 ' + (index + 1)) %>"
+									data-playlist-tag="<%= playlist.tag || (index === 0 ? '常听' : '歌单') %>"
+									data-playlist-description="<%= playlist.description || '把收藏的歌单慢慢铺开，给这一页一点能反复回来的理由。' %>"
+								>
+									<div class="lq-music-card__eyebrow"><%= playlist.tag || (index === 0 ? '常听' : '歌单') %></div>
+									<h2 class="lq-music-card__title"><%= playlist.title || ('歌单 ' + (index + 1)) %></h2>
+									<p class="lq-music-card__desc"><%= playlist.description || '把收藏的歌单慢慢铺开，给这一页一点能反复回来的理由。' %></p>
+									<span class="lq-music-card__action">播放这张歌单</span>
+								</a>
+							<% }) %>
+						<% } else { %>
+							<div class="lq-music-card lq-music-card--empty">
+								<div class="lq-music-card__eyebrow">歌单</div>
+								<h2 class="lq-music-card__title">先把喜欢的歌慢慢放进来</h2>
+								<p class="lq-music-card__desc">这里会展示你准备好的精选歌单，挑一张就能顺手开始播放。</p>
+							</div>
+						<% } %>
+					</div>
+				</div>
+				<div class="lq-music-panel" data-music-panel="queue">
+					<div class="lq-music-tracklist" data-music-tracklist>
+						<p class="lq-music-tracklist__placeholder">切到一张歌单后，这里会列出当前正在排队的曲目。</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<% if (music_page_content) { %>
+			<section class="post-content lq-music-extra">
+				<%- argon_preprocess_article(post.content, theme, false) %>
+			</section>
+		<% } %>
+	</article>
+<% } else {
+	let articleIntroItems = get_article_intro_items(post);
+	let articleOutro = get_article_outro_data(post);
+	let nextReadingHref = null;
+	if (articleOutro && articleOutro.nextReadingUrl) {
+		nextReadingHref = articleOutro.nextReadingUrl.match(/^(https?:)?\/\//)
+			? articleOutro.nextReadingUrl
+			: url_for(articleOutro.nextReadingUrl);
+	}
+%>
+	<article class="post post-full card bg-white shadow-sm border-0 lq-page-card <%= theme.enable_into_article_animation ? 'post-preview' : '' %>">
+		<header class="post-header text-center<%= has_thumbnail(post, theme) ? ' post-header-with-thumbnail' : ''%>">
+			<%
+				if (has_thumbnail(post, theme) && !theme.show_thumbnail_in_banner_in_content_page){
+					let thumbnail_url = get_thumbnail(post, theme); %>
+					<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='<%= thumbnail_url %>' alt='thumbnail'></img>
+					<div class='post-header-text-container'>
+				<% }
+				if (has_thumbnail(post, theme) && theme.show_thumbnail_in_banner_in_content_page){
+					let thumbnail_url = get_thumbnail(post, theme); %>
+					<style>
+						body section.banner {
+							background-image: url(<%= thumbnail_url %>) !important;
+						}
+					</style>
+				<% }
+			%>
+			<a class="post-title" href="<%= url_for(post.path) %>"><%= post.title %></a>
+			<div class="post-meta">
+				<%
+					let meta_list = theme.article_meta.split('|');
+					for (let i in meta_list){
+						if (meta_list[i] == 'time'){ %>
+							<% if (i > 0){ %>
+							<% } %>
+							<div class="post-meta-detail post-meta-detail-time">
+								<i class="fa fa-clock-o" aria-hidden="true"></i>
+								<time title="鍙戝竷浜?<%- full_date(post.date, 'YYYY-M-D H:mm:ss') %> | 缂栬緫浜?<%- full_date(post.updated, 'YYYY-M-D H:mm:ss') %>"><%- full_date(post.date, 'YYYY-M-D H:mm') %>
+								</time>
+							</div>
+						<% }
+						if (meta_list[i] == 'edittime'){ %>
+							<% if (i > 0){ %>
+								<div class="post-meta-devide">|</div>
+							<% } %>
+							<div class="post-meta-detail post-meta-detail-edittime">
+								<i class="fa fa-clock-o" aria-hidden="true"></i>
+								<time title="鍙戝竷浜?<%- full_date(post.date, 'YYYY-M-D H:mm:ss') %> | 缂栬緫浜?<%- full_date(post.updated, 'YYYY-M-D H:mm:ss') %>"><%- full_date(post.updated, 'YYYY-M-D H:mm') %>
+								</time>
+							</div>
+						<% }
+						if (meta_list[i] == 'read'){ %>
+							<% if (i > 0){ %>
+								<div class="post-meta-devide">|</div>
+							<% } %>
+							<div class="post-meta-detail post-meta-detail-words">
+								<i class="fa fa fa-book" aria-hidden="true"></i>
+								<span id="busuanzi_container_page_pv">
+									闃呰<span id="busuanzi_value_page_pv"></span>娆?
+								</span>
+							</div>
+						<% }
+						if (meta_list[i] == 'words'){ %>
+							<% if (i > 0){ %>
+								<div class="post-meta-devide">|</div>
+							<% } %>
+							<div class="post-meta-detail post-meta-detail-words">
+								<i class="fa fa-file-word-o" aria-hidden="true"></i>
+								<%= wordcount(post.content) %> 瀛?
+							</div>
+						<% }
+						if (meta_list[i] == 'readingtime'){ %>
+							<% if (i > 0){ %>
+								<div class="post-meta-devide">|</div>
+							<% } %>
+							<div class="post-meta-detail post-meta-detail-readingtime">
+								<i class="fa fa-hourglass-end" aria-hidden="true"></i>
+								<%= min2read(post.content,{cn:theme.reading_speed_cn, en:theme.reading_speed_en}) %> 鍒嗛挓
+							</div>
+						<% }
+
+					}
+				%>
+			</div>
+			<%
+				if (has_thumbnail(post, theme) && !theme.show_thumbnail_in_banner_in_content_page){ %>
+					</div>
+				<% }
+			%>
+		</header>
+
+		<% if (articleIntroItems.length > 0) { %>
+			<section class="lq-article-intro" aria-labelledby="article-intro-title">
+				<div class="lq-article-intro__eyebrow">文章速览</div>
+				<h2 class="lq-article-intro__title" id="article-intro-title">先看这篇适不适合你</h2>
+				<div class="lq-article-intro__grid">
+					<% articleIntroItems.forEach(function(item) { %>
+						<div class="lq-article-intro__item">
+							<div class="lq-article-intro__label"><%= item.label %></div>
+							<p class="lq-article-intro__content"><%= item.content %></p>
+						</div>
+					<% }) %>
+				</div>
+			</section>
+		<% } %>
+
+		<div class="post-content" id="post_content">
+			<%- argon_preprocess_article(post.content, theme, false) %>
+		</div>
+
+		<% if (articleOutro) { %>
+			<section class="lq-article-outro" aria-labelledby="article-outro-title">
+				<div class="lq-article-outro__eyebrow">读到这里</div>
+				<h2 class="lq-article-outro__title" id="article-outro-title">带走这一段，再继续下一篇</h2>
+				<% if (articleOutro.closing) { %>
+					<p class="lq-article-outro__closing"><%= articleOutro.closing %></p>
+				<% } %>
+				<% if (articleOutro.nextReadingTitle) { %>
+					<div class="lq-article-outro__next">
+						<span class="lq-article-outro__next-label">下一篇建议读什么</span>
+						<% if (nextReadingHref) { %>
+							<a class="lq-article-outro__next-link" href="<%= nextReadingHref %>"><%= articleOutro.nextReadingTitle %></a>
+						<% } else { %>
+							<span class="lq-article-outro__next-text"><%= articleOutro.nextReadingTitle %></span>
+						<% } %>
+					</div>
+				<% } %>
+			</section>
+		<% } %>
+	</article>
+<% } %>

@@ -1,0 +1,93 @@
+<% if (theme.show_lq_rightbar !== false) { %>
+	<%
+		const rightbar = theme.lq_rightbar || {};
+		const fallbackLinks = [
+			{ label: '归档', url: '/archives', icon: 'fa fa-archive' },
+			{ label: '标签', url: '/tags', icon: 'fa fa-tags' },
+			{ label: '分类', url: '/categories', icon: 'fa fa-folder-open-o' },
+			{ label: '搜索', action: 'search', icon: 'fa fa-search' }
+		];
+		const quickLinks = Array.isArray(rightbar.quick_links) && rightbar.quick_links.length ? rightbar.quick_links : fallbackLinks;
+		const recentCount = Number(rightbar.recent_posts_count) > 0 ? Number(rightbar.recent_posts_count) : 5;
+		const statusCopy = rightbar.status_copy || config.description || '一个安静记录代码、笔记和成长节奏的地方。';
+	%>
+	<aside class="lq-rightbar">
+		<% if (rightbar.show_status !== false) { %>
+			<section class="card shadow-sm border-0 lq-rightbar-card lq-rightbar-card--status">
+				<div class="lq-rightbar-card__title"><%= rightbar.status_title || '站点状态' %></div>
+				<div class="lq-rightbar-card__body">
+					<div class="lq-rightbar-stats">
+						<div class="lq-rightbar-stat">
+							<span class="lq-rightbar-stat__value"><%= site.posts.length %></span>
+							<span class="lq-rightbar-stat__label">文章</span>
+						</div>
+						<div class="lq-rightbar-stat">
+							<span class="lq-rightbar-stat__value"><%= site.categories.length %></span>
+							<span class="lq-rightbar-stat__label">分类</span>
+						</div>
+						<div class="lq-rightbar-stat">
+							<span class="lq-rightbar-stat__value"><%= site.tags.length %></span>
+							<span class="lq-rightbar-stat__label">标签</span>
+						</div>
+					</div>
+					<p class="lq-rightbar-copy"><%= statusCopy %></p>
+				</div>
+			</section>
+		<% } %>
+
+		<%
+			const techMap = build_tech_constellation(theme);
+			const latestNode = techMap.latestNode;
+		%>
+		<% if ((theme.lq_tech_map || {}).enabled !== false && techMap.nodes.length > 0) { %>
+			<section class="card shadow-sm border-0 lq-rightbar-card lq-rightbar-card--tech-map">
+				<div class="lq-rightbar-card__title"><%= techMap.miniEntry.title %></div>
+				<div class="lq-tech-mini-entry">
+					<p class="lq-tech-mini-entry__copy"><%= techMap.miniEntry.summary %></p>
+					<div class="lq-tech-mini-entry__stats">
+						<span><%= techMap.stats.totalNodes %> 节点</span>
+						<span><%= techMap.stats.branchCount %> 主干</span>
+					</div>
+					<% if (latestNode) { %>
+						<div class="lq-tech-mini-entry__latest">最近点亮：<%= latestNode.name %></div>
+					<% } %>
+					<a class="lq-tech-mini-entry__link" href="<%= url_for('/tech-map/') %>">进入技术星图</a>
+				</div>
+			</section>
+		<% } %>
+
+		<% if (rightbar.show_quick_links !== false) { %>
+			<section class="card shadow-sm border-0 lq-rightbar-card lq-rightbar-card--links">
+				<div class="lq-rightbar-card__title"><%= rightbar.quick_links_title || '快捷入口' %></div>
+				<div class="lq-rightbar-links">
+					<% quickLinks.forEach(function(item) { if (!item || !item.label) { return; } %>
+						<% if (item.action === 'search') { %>
+							<a class="lq-rightbar-link lq-search-trigger" href="#argon_search_modal" data-toggle="modal" data-target="#argon_search_modal">
+								<i class="<%= item.icon || 'fa fa-circle' %>" aria-hidden="true"></i>
+								<span><%= item.label %></span>
+							</a>
+						<% } else { %>
+							<a class="lq-rightbar-link" href="<%= url_for(item.url || '/') %>">
+								<i class="<%= item.icon || 'fa fa-circle' %>" aria-hidden="true"></i>
+								<span><%= item.label %></span>
+							</a>
+						<% } %>
+					<% }) %>
+				</div>
+			</section>
+		<% } %>
+
+		<% if (rightbar.show_recent_posts !== false) { %>
+			<section class="card shadow-sm border-0 lq-rightbar-card lq-rightbar-card--recent">
+				<div class="lq-rightbar-card__title"><%= rightbar.recent_posts_title || '最近文章' %></div>
+				<ul class="lq-rightbar-posts">
+					<% site.posts.sort('date', -1).limit(recentCount).each(function(item) { %>
+						<li>
+							<a href="<%= url_for(item.path) %>"><%= item.title || '未命名文章' %></a>
+						</li>
+					<% }) %>
+				</ul>
+			</section>
+		<% } %>
+	</aside>
+<% } %>

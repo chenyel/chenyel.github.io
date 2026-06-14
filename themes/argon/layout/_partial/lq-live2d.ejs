@@ -1,0 +1,50 @@
+<%
+	const live2dTheme = theme.lq_live2d || {};
+	const live2dConfig = config.live2d || {};
+	const live2dEnabled = theme.show_lq_live2d !== false && live2dConfig.enable;
+	const live2dDisplay = live2dConfig.display || {};
+	const live2dPosition = live2dDisplay.position === 'left' ? 'left' : 'right';
+	const live2dWidth = Number(live2dDisplay.width) || 170;
+	const live2dHeight = Number(live2dDisplay.height) || 340;
+	const live2dHorizontal = Number(live2dDisplay.hOffset);
+	const live2dVertical = Number(live2dDisplay.vOffset);
+	const live2dFigure = live2dTheme.image || theme.sidebar_auther_image || '/img/avatar.png';
+%>
+<% if (theme.show_lq_live2d !== false) { %>
+	<div
+		class="lq-live2d <%= live2dTheme.mobile_hidden ? 'lq-live2d-mobile-hidden' : '' %> <%= live2dEnabled ? 'lq-live2d--widget' : 'lq-live2d--fallback' %> lq-live2d--<%= live2dPosition %>"
+		data-live2d-root
+		style="--lq-live2d-width:<%= live2dWidth %>px;--lq-live2d-height:<%= live2dHeight %>px;--lq-live2d-horizontal:<%= Number.isFinite(live2dHorizontal) ? live2dHorizontal : 24 %>px;--lq-live2d-vertical:<%= Number.isFinite(live2dVertical) ? live2dVertical : 0 %>px;"
+	>
+		<div class="lq-live2d-dock">
+			<div class="lq-live2d-bubble" data-live2d-bubble><%= live2dTheme.greeting || 'Hello there.' %></div>
+			<div class="lq-live2d-stage">
+				<div class="lq-live2d-actions" aria-label="Live2D helper actions">
+					<button type="button" class="lq-live2d-action" data-live2d-action="theme" aria-label="Toggle theme" title="Toggle theme">
+						<i class="fa fa-moon-o" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="lq-live2d-action" data-live2d-action="home" aria-label="Go home" title="Go home">
+						<i class="fa fa-home" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="lq-live2d-action" data-live2d-action="top" aria-label="Back to top" title="Back to top">
+						<i class="fa fa-arrow-up" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="lq-live2d-action" data-live2d-action="compact" aria-label="Compact assistant" title="Compact assistant">
+						<i class="fa fa-minus lq-live2d-action__icon lq-live2d-action__icon--compact" aria-hidden="true"></i>
+						<i class="fa fa-plus lq-live2d-action__icon lq-live2d-action__icon--expand" aria-hidden="true"></i>
+					</button>
+				</div>
+				<button type="button" class="lq-live2d-avatar" data-live2d-avatar aria-label="Expand assistant" title="Expand assistant">
+					<img src="<%= live2dFigure %>" alt="live2d avatar">
+				</button>
+				<% if (live2dEnabled) { %>
+					<div class="lq-live2d-host"><%- live2d() %></div>
+				<% } else { %>
+					<div class="lq-live2d-figure">
+						<img src="<%= live2dFigure %>" alt="site mascot">
+					</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+<% } %>

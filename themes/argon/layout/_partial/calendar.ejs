@@ -1,0 +1,40 @@
+<%
+	const calendarConfig = theme.lq_calendar || {};
+	const calendarTitle = calendarConfig.title || '今日黄历';
+	const showDetail = calendarConfig.show_detail !== false;
+	const showNavigator = calendarConfig.show_navigator !== false;
+	const mobileFull = calendarConfig.mobile_full !== false;
+%>
+<section
+	class="lq-calendar-card"
+	data-lq-calendar
+	data-calendar-title="<%= calendarTitle %>"
+	data-calendar-show-detail="<%= showDetail ? 'true' : 'false' %>"
+	data-calendar-show-navigator="<%= showNavigator ? 'true' : 'false' %>"
+	data-calendar-mobile-full="<%= mobileFull ? 'true' : 'false' %>"
+>
+	<div class="lq-calendar__header">
+		<div class="lq-calendar__heading">
+			<div class="lq-calendar__eyebrow">Calendar</div>
+			<h3 class="lq-calendar__title"><%= calendarTitle %></h3>
+		</div>
+		<div class="lq-calendar__nav" <% if (!showNavigator) { %>hidden<% } %>>
+			<button class="lq-calendar__nav-btn" type="button" data-calendar-nav="prev" aria-label="上个月">‹</button>
+			<span class="lq-calendar__month-label" data-calendar-month-label>--</span>
+			<button class="lq-calendar__nav-btn" type="button" data-calendar-nav="next" aria-label="下个月">›</button>
+		</div>
+	</div>
+	<div class="lq-calendar__weekdays" aria-hidden="true">
+		<span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+	</div>
+	<div class="lq-calendar__grid" data-calendar-grid></div>
+	<div class="lq-calendar__detail" data-calendar-detail <% if (!showDetail) { %>hidden<% } %>>
+		<div class="lq-calendar__detail-date" data-calendar-detail-date>--</div>
+		<div class="lq-calendar__detail-row"><span>农历</span><span data-calendar-detail-lunar>--</span></div>
+		<div class="lq-calendar__detail-row"><span>星期</span><span data-calendar-detail-weekday>--</span></div>
+		<div class="lq-calendar__detail-row" data-calendar-row="term" hidden><span>节气</span><span data-calendar-detail-term></span></div>
+		<div class="lq-calendar__detail-row" data-calendar-row="festival" hidden><span>节日</span><span data-calendar-detail-festival></span></div>
+		<div class="lq-calendar__detail-row"><span>宜</span><span data-calendar-detail-yi>--</span></div>
+		<div class="lq-calendar__detail-row"><span>忌</span><span data-calendar-detail-ji>--</span></div>
+	</div>
+</section>

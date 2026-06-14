@@ -1,0 +1,118 @@
+<%
+	let heroBackground = theme.home_hero_background || theme.banner_background_url || '/img/background.png';
+	let heroOverlay = theme.home_hero_overlay || 'rgba(242, 220, 229, 0.35)';
+	let heroTitle = theme.banner_title || config.title;
+	let heroSubtitle = theme.home_slogan || theme.banner_subtitle || config.description;
+	let homeTitleMotionEnabled = is_home() && theme.enable_home_title_motion !== false;
+	let homeTitleMotionMode = homeTitleMotionEnabled ? 'chars' : 'none';
+	let homeTitleMotionInterval = theme.home_title_motion_interval != null ? theme.home_title_motion_interval : 90;
+	let homeSubtitleRevealDelay = theme.home_subtitle_reveal_delay != null ? theme.home_subtitle_reveal_delay : 680;
+	let pageBodyClass = is_home() ? 'lq-home-page' : (is_post() ? 'lq-post-page' : 'lq-inner-page');
+	let pageShellClass = is_home() ? 'lq-home-shell' : 'lq-shell-wrap';
+	let pageDocumentTitle = config.title;
+	const currentPage = typeof page !== 'undefined' ? page : null;
+	const currentPost = typeof post !== 'undefined' ? post : null;
+	const routePath = currentPage && currentPage.path ? currentPage.path : '';
+	const isTaxonomyLanding = routePath.indexOf('categories/') === 0 || routePath.indexOf('tags/') === 0;
+
+	if (currentPage && currentPage.title) {
+		pageDocumentTitle = currentPage.title + ' - ' + config.title;
+	} else if (is_tag()) {
+		pageDocumentTitle = '标签 : ' + currentPage.tag + ' - ' + config.title;
+	} else if (is_category()) {
+		pageDocumentTitle = '分类 : ' + currentPage.category + ' - ' + config.title;
+	} else if (is_archive()) {
+		if (currentPage && currentPage.year) {
+			pageDocumentTitle = '归档 : ' + currentPage.year + (currentPage.month == undefined ? '' : '/' + currentPage.month) + ' - ' + config.title;
+		} else {
+			pageDocumentTitle = '归档 - ' + config.title;
+		}
+	}
+
+	if (!is_home()) {
+		heroBackground = theme.page_hero_background || theme.banner_background_url || heroBackground;
+		heroOverlay = theme.page_hero_overlay || heroOverlay;
+		heroSubtitle = config.description || theme.banner_subtitle || '';
+
+		if (currentPage && currentPage.title) {
+			heroTitle = currentPage.title;
+		} else if (is_archive()) {
+			heroTitle = currentPage && currentPage.year
+				? `Archive - ${currentPage.year}${currentPage.month ? '.' + currentPage.month : ''}`
+				: 'Archive';
+		} else if (is_tag()) {
+			heroTitle = currentPage && currentPage.tag ? `Tag - ${currentPage.tag}` : 'Tag';
+		} else if (is_category()) {
+			heroTitle = currentPage && currentPage.category ? `Category - ${currentPage.category}` : 'Category';
+		}
+
+		if (is_archive()) {
+			heroBackground = theme.archive_hero_background || heroBackground;
+			heroOverlay = theme.archive_hero_overlay || heroOverlay;
+		}
+
+		if (is_tag() || is_category() || isTaxonomyLanding) {
+			heroBackground = theme.taxonomy_hero_background || heroBackground;
+			heroOverlay = theme.taxonomy_hero_overlay || heroOverlay;
+		}
+
+		if (is_post()) {
+			heroBackground = theme.post_hero_background || heroBackground;
+			heroOverlay = theme.post_hero_overlay || heroOverlay;
+
+			if (
+				currentPost &&
+				typeof has_thumbnail === 'function' &&
+				typeof get_thumbnail === 'function' &&
+				theme.show_thumbnail_in_banner_in_content_page &&
+				has_thumbnail(currentPost, theme)
+			) {
+				heroBackground = get_thumbnail(currentPost, theme);
+			}
+		}
+	}
+%>
+<section
+	id="banner"
+	class="banner section section-lg section-shaped <%= is_home() ? 'lq-home-hero' : 'lq-page-hero' %>"
+	data-page-body-class="<%= pageBodyClass %>"
+	data-page-shell-class="<%= pageShellClass %>"
+	data-page-title="<%= pageDocumentTitle %>"
+	data-tab-blur-title="<%= theme.tab_blur_title || '\u79bb\u5f00\u4e86\u2026\u2026' %>"
+	data-tab-focus-title="<%= theme.tab_focus_title || '\u56de\u6765\u5566~' %>"
+	style="--lq-hero-overlay:<%= heroOverlay %>;--lq-hero-image:url('<%= heroBackground %>');"
+>
+	<div class="lq-hero-backdrop"></div>
+	<div id="banner_container" class="banner-container container text-center lq-hero-content">
+		<div
+			class="banner-title text-white"
+			<% if (is_home()) { %>
+				data-title-motion="<%= homeTitleMotionMode %>"
+				data-title-motion-interval="<%= homeTitleMotionInterval %>"
+				data-subtitle-reveal-delay="<%= homeSubtitleRevealDelay %>"
+			<% } %>
+		>
+			<span class="banner-title-inner<%= homeTitleMotionEnabled ? ' is-pending-motion' : '' %>"><%= heroTitle %></span>
+			<% if (heroSubtitle) { %>
+				<span class="banner-subtitle d-block<%= homeTitleMotionEnabled ? ' is-pending-motion' : '' %>"><%= heroSubtitle %></span>
+			<% } %>
+		</div>
+		<% if (homeTitleMotionEnabled) { %>
+			<noscript>
+				<style>
+					#banner .banner-title-inner.is-pending-motion,
+					#banner .banner-subtitle.is-pending-motion {
+						opacity: 1 !important;
+						transform: none !important;
+					}
+				</style>
+			</noscript>
+		<% } %>
+		<% if (is_home()) { %>
+			<button class="lq-hero-scroll" type="button" aria-label="Scroll to content">
+				<span>Scroll</span>
+				<i class="fa fa-angle-down" aria-hidden="true"></i>
+			</button>
+		<% } %>
+	</div>
+</section>

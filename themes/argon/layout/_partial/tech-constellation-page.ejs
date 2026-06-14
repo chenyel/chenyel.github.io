@@ -1,0 +1,195 @@
+<%
+  const techMap = constellation || build_tech_constellation(theme);
+  const defaultNodeId = techMap.defaultNodeId;
+%>
+<article class="post post-full card bg-white shadow-sm border-0 lq-page-card lq-tech-constellation-page" data-tech-constellation>
+  <div class="lq-tech-constellation-page__aurora" aria-hidden="true"></div>
+
+  <header class="lq-tech-constellation-page__hero">
+    <div class="lq-tech-constellation-page__intro">
+      <span class="lq-tech-constellation-page__eyebrow"><%= techMap.page.eyebrow %></span>
+      <h1 class="lq-tech-constellation-page__title"><%= techMap.page.title %></h1>
+      <p class="lq-tech-constellation-page__identity"><%= techMap.page.identity %></p>
+      <p class="lq-tech-constellation-page__copy"><%= techMap.page.summary %></p>
+    </div>
+
+    <div class="lq-tech-constellation-page__stats" role="list" aria-label="Tech constellation statistics">
+      <div class="lq-tech-constellation-stat" role="listitem">
+        <span class="lq-tech-constellation-stat__value"><%= techMap.stats.totalNodes %></span>
+        <span class="lq-tech-constellation-stat__label">技术节点</span>
+      </div>
+      <div class="lq-tech-constellation-stat" role="listitem">
+        <span class="lq-tech-constellation-stat__value"><%= techMap.stats.branchCount %></span>
+        <span class="lq-tech-constellation-stat__label">主干</span>
+      </div>
+      <div class="lq-tech-constellation-stat" role="listitem">
+        <span class="lq-tech-constellation-stat__value"><%= techMap.latestNode ? techMap.latestNode.updatedAt : '--' %></span>
+        <span class="lq-tech-constellation-stat__label">最近更新</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="lq-tech-view-switcher" aria-label="技术星图视图模式">
+    <button type="button" class="lq-tech-view-switcher__button is-active" data-tech-view-mode="overview">总览模式</button>
+    <button type="button" class="lq-tech-view-switcher__button" data-tech-view-mode="immersive">沉浸模式</button>
+    <button type="button" class="lq-tech-view-switcher__button" data-tech-view-mode="edit">编辑模式</button>
+  </section>
+
+  <section class="lq-tech-constellation__toolbar" aria-label="技术星图工具栏">
+    <label class="lq-tech-constellation__search">
+      <span class="lq-tech-constellation__toolbar-label">搜索节点</span>
+      <input type="search" data-tech-search placeholder="搜索技术名、备注、标签">
+    </label>
+
+    <div class="lq-tech-constellation__toolbar-group">
+      <span class="lq-tech-constellation__toolbar-label">主干筛选</span>
+      <div class="lq-tech-constellation__filters" role="tablist" aria-label="Tech branch filters">
+        <button type="button" class="lq-tech-filter-chip is-active" data-tech-branch-filter="all">全部</button>
+        <% techMap.branches.forEach(function(branch) { %>
+          <button type="button" class="lq-tech-filter-chip" data-tech-branch-filter="<%= branch.id %>"><%= branch.name %></button>
+        <% }) %>
+      </div>
+    </div>
+
+    <div class="lq-tech-constellation__toolbar-group">
+      <span class="lq-tech-constellation__toolbar-label">当前显示</span>
+      <div class="lq-tech-constellation__toolbar-actions">
+        <span class="lq-tech-constellation__visible-count" data-tech-visible-count><%= techMap.stats.totalNodes %> / <%= techMap.stats.totalNodes %> 节点</span>
+        <button type="button" class="lq-tech-toolbar-button" data-tech-reset-view>重置视角</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="lq-tech-constellation">
+    <section class="lq-tech-constellation__stage" aria-label="3D tech constellation stage">
+      <canvas class="lq-tech-constellation__canvas" data-tech-map-canvas></canvas>
+      <div class="lq-tech-constellation__overlay" data-tech-map-overlay aria-hidden="true"></div>
+      <div class="lq-tech-constellation__stage-hint" aria-hidden="true">拖拽旋转 · 滚轮缩放 · 双击回正</div>
+      <div class="lq-tech-constellation__fallback" data-tech-map-fallback>
+        <% techMap.branches.forEach(function(branch) { %>
+          <section class="lq-tech-constellation__branch" data-tech-map-branch="<%= branch.id %>" style="--branch-accent:<%= branch.color %>;">
+            <div class="lq-tech-constellation__branch-head">
+              <span class="lq-tech-constellation__branch-kicker"><%= branch.subtitle || branch.name %></span>
+              <h2 class="lq-tech-constellation__branch-title"><%= branch.name %></h2>
+              <p class="lq-tech-constellation__branch-copy"><%= branch.description %></p>
+            </div>
+            <div class="lq-tech-constellation__branch-nodes">
+              <% branch.nodes.forEach(function(node) { %>
+                <button
+                  type="button"
+                  class="lq-tech-node <%= node.id === defaultNodeId ? 'is-active' : '' %>"
+                  data-tech-node="<%= node.id %>"
+                  data-branch-id="<%= branch.id %>"
+                  aria-pressed="<%= node.id === defaultNodeId ? 'true' : 'false' %>"
+                >
+                  <span class="lq-tech-node__icon <%= node.icon ? 'has-image' : 'is-fallback' %>">
+                    <% if (node.icon) { %>
+                      <img src="<%= node.icon %>" alt="<%= node.name %>" loading="lazy" onerror="this.hidden=true;this.parentNode.classList.add('is-fallback');">
+                    <% } %>
+                    <span class="lq-tech-node__initials"><%= node.initials %></span>
+                  </span>
+                  <span class="lq-tech-node__meta">
+                    <span class="lq-tech-node__name"><%= node.name %></span>
+                    <span class="lq-tech-node__note"><%= node.shortNote %></span>
+                  </span>
+                  <span class="lq-tech-node__badge lq-tech-node__badge--<%= node.statusKey %>"><%= node.status %></span>
+                </button>
+              <% }) %>
+            </div>
+          </section>
+        <% }) %>
+      </div>
+    </section>
+
+    <aside class="lq-tech-constellation__detail is-sticky" aria-live="polite">
+      <section class="lq-tech-constellation__navigator">
+        <div class="lq-tech-constellation__navigator-head">
+          <span class="lq-tech-constellation__toolbar-label">快速定位</span>
+          <p class="lq-tech-constellation__navigator-copy">不想在星图里找，可以直接从这里跳转。</p>
+        </div>
+        <div class="lq-tech-node-list" data-tech-node-list>
+          <% techMap.nodes.forEach(function(node) { %>
+            <button type="button" class="lq-tech-node-list__item <%= node.id === defaultNodeId ? 'is-active' : '' %>" data-tech-list-node="<%= node.id %>" data-branch-id="<%= node.branch %>">
+              <span class="lq-tech-node-list__name"><%= node.name %></span>
+              <span class="lq-tech-node-list__meta"><%= node.branchName %> · <%= node.status %></span>
+            </button>
+          <% }) %>
+        </div>
+      </section>
+
+      <div class="lq-tech-constellation__empty" data-tech-empty-state hidden>没有找到匹配节点，换个关键词或者切回“全部”试试。</div>
+      <div class="lq-tech-constellation__detail-stack" data-tech-detail-stack>
+        <% techMap.nodes.forEach(function(node) { %>
+          <section class="lq-tech-detail-panel <%= node.id === defaultNodeId ? 'is-active' : '' %>" data-tech-panel="<%= node.id %>">
+            <header class="lq-tech-detail-panel__header">
+              <div class="lq-tech-detail-panel__title-wrap">
+                <span class="lq-tech-detail-panel__branch"><%= node.branchName %></span>
+                <h2 class="lq-tech-detail-panel__title"><%= node.name %></h2>
+              </div>
+              <span class="lq-tech-detail-panel__status lq-tech-detail-panel__status--<%= node.statusKey %>"><%= node.status %></span>
+            </header>
+            <p class="lq-tech-detail-panel__note"><%= node.shortNote %></p>
+            <p class="lq-tech-detail-panel__copy"><%= node.detail %></p>
+            <% if (node.tags.length) { %>
+              <div class="lq-tech-detail-panel__chips">
+                <% node.tags.forEach(function(tag) { %>
+                  <span class="lq-tech-detail-panel__chip"><%= tag %></span>
+                <% }) %>
+              </div>
+            <% } %>
+            <% if (node.articles.length) { %>
+              <div class="lq-tech-detail-panel__links">
+                <% node.articles.forEach(function(article) { %>
+                  <a class="lq-tech-detail-panel__link" href="<%= article.url %>"><%= article.title %></a>
+                <% }) %>
+              </div>
+            <% } %>
+            <div class="lq-tech-detail-panel__updated">最近更新：<%= node.updatedAt || '--' %></div>
+          </section>
+        <% }) %>
+      </div>
+
+      <section class="lq-tech-editor" data-tech-editor-form hidden>
+        <div class="lq-tech-editor__head">
+          <span class="lq-tech-constellation__toolbar-label">本地作者编辑</span>
+          <p class="lq-tech-constellation__navigator-copy">只在本地使用。先绑定 [source/_data/argon.yml](/D:/blog/source/_data/argon.yml)，再修改当前节点状态与备注。</p>
+        </div>
+        <div class="lq-tech-editor__actions">
+          <button type="button" class="lq-tech-toolbar-button" data-tech-bind-file>绑定配置文件</button>
+          <button type="button" class="lq-tech-toolbar-button" data-tech-save-node>保存修改</button>
+          <button type="button" class="lq-tech-toolbar-button" data-tech-cancel-edit>取消修改</button>
+        </div>
+        <div class="lq-tech-editor__status" data-tech-editor-status>还没有绑定配置文件。</div>
+        <form class="lq-tech-editor__form" data-tech-node-edit-form>
+          <label class="lq-tech-editor__field">
+            <span>当前节点</span>
+            <input type="text" data-tech-edit-name readonly>
+          </label>
+          <label class="lq-tech-editor__field">
+            <span>状态</span>
+            <select data-tech-edit-status>
+              <option value="了解">了解</option>
+              <option value="会用">会用</option>
+              <option value="做过项目">做过项目</option>
+              <option value="能输出">能输出</option>
+            </select>
+          </label>
+          <label class="lq-tech-editor__field">
+            <span>短标签</span>
+            <input type="text" data-tech-edit-short-note>
+          </label>
+          <label class="lq-tech-editor__field">
+            <span>详细备注</span>
+            <textarea rows="5" data-tech-edit-detail></textarea>
+          </label>
+          <label class="lq-tech-editor__field">
+            <span>标签</span>
+            <input type="text" data-tech-edit-tags placeholder="用逗号分隔，比如 Java, 后端, 框架">
+          </label>
+        </form>
+      </section>
+    </aside>
+  </div>
+
+  <script class="lq-tech-constellation-data" type="application/json"><%- JSON.stringify(techMap) %></script>
+</article>

@@ -1,0 +1,377 @@
+theme_color: '#8bbfdf'
+show_customize_theme_color_picker: false
+darkmode_autoswitch: false
+enable_amoled_dark: false
+card_radius: 18
+card_shadow: big
+font: sans-serif
+enable_headroom: false
+
+home_slogan: '人生有 bug，我们慢慢修补。'
+home_hero_background: '/img/home_img.png'
+home_hero_overlay: 'rgba(242, 220, 229, 0.16)'
+enable_home_title_motion: true
+home_title_motion_interval: 90
+home_subtitle_reveal_delay: 680
+post_hero_background: '/img/post_img.png'
+post_hero_overlay: 'rgba(244, 248, 255, 0.10)'
+archive_hero_background: '/img/archive_img.png'
+archive_hero_overlay: 'rgba(244, 248, 255, 0.10)'
+taxonomy_hero_background: '/img/category_img.png'
+taxonomy_hero_overlay: 'rgba(244, 248, 255, 0.10)'
+page_hero_background: '/img/default_top_img.png'
+page_hero_overlay: 'rgba(244, 248, 255, 0.10)'
+tab_blur_title: '离开了……'
+tab_focus_title: '回来啦~'
+music_page_intro: '这一页存放最近让我安静下来的声音。'
+music_api_base_url: ''
+music_featured_playlists:
+  - id: '8948680268'
+    title: '我喜欢'
+    tag: '常听'
+    description: '把最近循环的歌整理成一张顺手就能播放的歌单。'
+show_lq_player: true
+show_lq_live2d: true
+show_lq_rightbar: true
+show_lq_loader: true
+show_lq_cursor_fx: true
+show_lq_snow: true
+comment_style: 'card'
+lq_loader:
+  mode: 'divergence'
+  scope: 'site'
+  minimum_duration: 900
+  repeat_visit_duration: 320
+  settle_duration: 260
+  complete_hold_duration: 520
+  brand: 'CHENYE ARCHIVE'
+  title: 'Entering Signal Layer'
+  subtitle: '正在接入这片属于我的 signal layer'
+  complete_text: 'Signal layer aligned'
+  palette:
+    accent: '#a7f6ff'
+    accent_soft: 'rgba(167, 246, 255, 0.26)'
+    backdrop: '#050b14'
+    line: 'rgba(167, 246, 255, 0.24)'
+    text: '#f4fdff'
+  meter:
+    major_digits:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+    digits: 6
+    interval: 90
+    settle_interval: 240
+    decimal_separator: '.'
+  overrides: {}
+lq_cursor:
+  desktop_only: true
+  default_cursor: '/img/cursor-default.svg'
+  pointer_cursor: '/img/cursor-pointer.svg'
+  trail_count: 10
+  trail_size: 12
+  trail_color: 'rgba(255,255,255,0.72)'
+lq_snow:
+  count: 42
+  speed: 0.85
+  max_size: 3.2
+  opacity: 0.78
+  drift: 0.32
+lq_player:
+  title: '欢迎回家'
+  artist: 'chenye'
+  cover: '/img/nav_logo.png'
+  audio: ''
+  autoplay: true
+  playlist: []
+lq_calendar:
+  enabled: true
+  title: '今日黄历'
+  show_detail: true
+  show_navigator: true
+  mobile_full: true
+lq_tech_map:
+  enabled: true
+  page:
+    title: '技术星图'
+    eyebrow: 'Tech Constellation'
+    summary: '把 Java 后端、大模型和 Agent 的学习轨迹整理成一张可探索的公开成长图。'
+    identity: 'Java 后端 / 大模型 / Agent'
+  mini_entry:
+    title: '技术星图'
+    summary: '最近在点亮新的技术节点。'
+  branches:
+    - id: 'java-backend'
+      name: 'Java后端'
+      subtitle: 'Service Spine'
+      description: '服务、数据和工程能力的稳定主轴。'
+      color: '#57d6ff'
+      core_position: { x: -22, y: 6, z: -14 }
+    - id: 'llm'
+      name: '大模型'
+      subtitle: 'Model Orbit'
+      description: '围绕理解、检索和生成能力继续延展。'
+      color: '#9e7dff'
+      core_position: { x: 0, y: 14, z: -6 }
+    - id: 'agent'
+      name: 'Agent'
+      subtitle: 'Workflow Pulse'
+      description: '把模型能力接到工具、记忆和流程上。'
+      color: '#58efbf'
+      core_position: { x: 22, y: -2, z: -12 }
+  nodes:
+    - id: 'java'
+      name: 'Java'
+      branch: 'java-backend'
+      status: '做过项目'
+      icon: 'https://cdn.simpleicons.org/openjdk/ffffff'
+      short_note: '后端主语言'
+      detail: '做过基础语法、集合、面向对象和常见服务端开发实践。'
+      tags: ['语言', '后端']
+      updated_at: '2026-06-01'
+      position: { x: -30, y: 12, z: 4 }
+    - id: 'spring-boot'
+      name: 'Spring Boot'
+      branch: 'java-backend'
+      status: '做过项目'
+      icon: 'https://cdn.simpleicons.org/springboot/6DB33F'
+      short_note: '项目主力框架'
+      detail: '做过接口开发、参数校验、异常处理和基础分层。'
+      tags: ['框架', '后端']
+      updated_at: '2026-06-10'
+      position: { x: -12, y: 14, z: 10 }
+    - id: 'mysql'
+      name: 'MySQL'
+      branch: 'java-backend'
+      status: '会用'
+      icon: 'https://cdn.simpleicons.org/mysql/4479A1'
+      short_note: '常用关系型数据库'
+      detail: '能完成基础建表、查询和索引层面的日常学习与使用。'
+      tags: ['数据库']
+      updated_at: '2026-05-27'
+      position: { x: -18, y: -6, z: 14 }
+    - id: 'redis'
+      name: 'Redis'
+      branch: 'java-backend'
+      status: '了解'
+      icon: 'https://cdn.simpleicons.org/redis/DC382D'
+      short_note: '正在补缓存思路'
+      detail: '开始理解缓存、过期和常见使用场景。'
+      tags: ['缓存']
+      updated_at: '2026-05-25'
+      position: { x: -34, y: -4, z: 6 }
+    - id: 'transformer'
+      name: 'Transformer'
+      branch: 'llm'
+      status: '了解'
+      icon: 'https://cdn.simpleicons.org/huggingface/FFD21E'
+      short_note: '打基础的关键概念'
+      detail: '正在把注意力机制、编码表示和整体结构梳理清楚。'
+      tags: ['原理', 'LLM']
+      updated_at: '2026-05-30'
+      position: { x: -4, y: 28, z: 8 }
+    - id: 'prompt-engineering'
+      name: 'Prompt Engineering'
+      branch: 'llm'
+      status: '会用'
+      icon: 'https://cdn.simpleicons.org/openai/ffffff'
+      short_note: '持续打磨提示词表达'
+      detail: '已经能通过角色、约束和格式要求提高输出稳定性。'
+      tags: ['提示词', 'LLM']
+      updated_at: '2026-06-07'
+      position: { x: 8, y: 18, z: 12 }
+    - id: 'rag'
+      name: 'RAG'
+      branch: 'llm'
+      status: '会用'
+      icon: 'https://cdn.simpleicons.org/openai/ffffff'
+      short_note: '开始搭检索增强链路'
+      detail: '已经理解基础链路，正在把向量检索和问答流程串起来。'
+      tags: ['检索', '问答']
+      updated_at: '2026-06-11'
+      position: { x: 2, y: 22, z: 6 }
+    - id: 'embedding'
+      name: 'Embedding'
+      branch: 'llm'
+      status: '了解'
+      icon: 'https://cdn.simpleicons.org/openai/ffffff'
+      short_note: '在补向量语义基础'
+      detail: '正在理解文本向量化和相似度检索的基础概念。'
+      tags: ['向量', '检索']
+      updated_at: '2026-06-03'
+      position: { x: -10, y: 10, z: 14 }
+    - id: 'tool-calling'
+      name: 'Tool Calling'
+      branch: 'agent'
+      status: '了解'
+      icon: 'https://cdn.simpleicons.org/python/3776AB'
+      short_note: '刚开始梳理调用模式'
+      detail: '正在建立对工具选择、入参与结果回写的整体认知。'
+      tags: ['Agent', '工具']
+      updated_at: '2026-06-12'
+      position: { x: 24, y: 8, z: 8 }
+    - id: 'workflow'
+      name: 'Workflow'
+      branch: 'agent'
+      status: '会用'
+      icon: 'https://cdn.simpleicons.org/langchain/1C3C3C'
+      short_note: '能画出基础链路'
+      detail: '开始把模型输入、工具调用和结果整理成稳定的流程。'
+      tags: ['Agent', '流程']
+      updated_at: '2026-06-09'
+      position: { x: 34, y: 6, z: 4 }
+    - id: 'memory'
+      name: 'Memory'
+      branch: 'agent'
+      status: '了解'
+      icon: 'https://cdn.simpleicons.org/langchain/1C3C3C'
+      short_note: '正在理解上下文保存'
+      detail: '关注会话记忆、状态延续和长链路上下文管理。'
+      tags: ['Agent', '记忆']
+      updated_at: '2026-06-04'
+      position: { x: 20, y: -8, z: 14 }
+lq_rightbar:
+  show_status: true
+  status_title: '站点状态'
+  status_copy: ''
+  show_quick_links: true
+  quick_links_title: '快捷入口'
+  quick_links:
+    - label: '归档'
+      url: '/archives'
+      icon: 'fa fa-archive'
+    - label: '标签'
+      url: '/tags'
+      icon: 'fa fa-tags'
+    - label: '分类'
+      url: '/categories'
+      icon: 'fa fa-folder-open-o'
+    - label: '搜索'
+      action: 'search'
+      icon: 'fa fa-search'
+  show_recent_posts: true
+  recent_posts_title: '最近文章'
+  recent_posts_count: 5
+lq_live2d:
+  image: '/img/avatar.png'
+  greeting: '早上好！'
+  mobile_hidden: true
+
+toolbar_icon: '/img/nav_logo.png'
+toolbar_icon_link: '/'
+toolbar_title: ''
+toolbar_menu:
+  首页: /
+  文章: /archives
+  碎碎念: /tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/
+  关于: /about
+  社交: /link
+  更多:
+    音乐: /music
+    标签: /tags
+    分类: /categories
+
+banner_title: ''
+enable_banner_title_typing_effect: false
+theme.banner_typing_effect_interval: 100
+banner_subtitle: '人生有 bug，我们慢慢修补。'
+banner_background_url: '/img/background.png'
+banner_background_hide_shapes: true
+banner_background_color_type: 'shape-primary'
+
+sidebar_banner_title: ''
+sidebar_banner_subtitle: '慢一点，但别停。'
+sidebar_announcement: '正在把博客打磨成更完整的沉浸式版本。'
+leftbar_menu:
+  首页: /
+  归档: /archives
+  关于: /about
+  友链: /link
+sidebar_auther_image: '/img/avatar.png'
+sidebar_auther_name: 'chenye'
+leftbar_author_links: false
+leftbar_friend_links: false
+show_headindex_number: true
+
+excerpt: true
+first_image_as_thumbnail: false
+article_meta: time|categories|read|words|readingtime
+reading_speed_cn: 300
+reading_speed_en: 160
+donate_qrcode_url: ''
+additional_content_after_post: ''
+article_header_style: default
+
+page_background_url: '/img/background.png'
+page_background_dark_url: '/img/background.png'
+page_background_opacity: 0.12
+transparent_banner: true
+show_toolbar_mask: true
+
+fab_show_darkmode_button: false
+fab_show_settings_button: false
+fab_show_gotocomment_button: true
+
+smoothscroll: 1
+
+enable_zoomify: true
+zoomify_duration: 200
+zoomify_easing: cubic-bezier(0.4,0,0,1)
+zoomify_scale: 0.9
+
+enable_lazyload: true
+lazyload_threshold: 800
+lazyload_effect: fadeIn
+lazyload_loading_style: 1
+
+enable_pangu: false
+pjax_disabled: true
+enable_into_article_animation: false
+enable_mobile_scale: false
+
+footer_html: '<div class="lq-footer-meta">记录代码、笔记，还有一点点生活。</div>'
+
+math_render: ''
+mathjax_cdn_url: //cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js
+argon_mathjax_v2_cdn_url: //cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-AMS_HTML
+katex_cdn_url: //cdn.jsdelivr.net/npm/katex@0.11.1/dist/
+
+enable_code_highlight: false
+code_theme: vs2015
+
+custom_html_head: ''
+custom_html_foot: ''
+
+gitalk:
+  enable: false
+  owner: ''
+  repo: ''
+  admin: ''
+  clientID: ''
+  clientSecret: ''
+giscus:
+  enable: false
+  repo: ''
+  repo_id: ''
+  category: ''
+  category_id: ''
+  mapping: 'pathname'
+  input_position: 'top'
+  theme: 'light'
+  lang: 'zh-CN'
+waline:
+  enable: false
+  server_url: ''
+twikoo:
+  enable: false
+  envID: ' '
+  lang: 'zh-CN'
+
+baidu_analytics:
+  enable: false
+  id: ''
+
+gtag:
+  enable: false
+  id: ''

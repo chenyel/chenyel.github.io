@@ -1,0 +1,38 @@
+<%
+	const currentEntry = (typeof post !== 'undefined' && post) || (typeof page !== 'undefined' && page) || {};
+	const loaderConfig = resolve_lq_loader(theme, currentEntry);
+	const cursor = theme.lq_cursor || {};
+	const snow = theme.lq_snow || {};
+	const effectsConfig = {
+		loader: loaderConfig,
+		cursor: {
+			enabled: theme.show_lq_cursor_fx !== false,
+			desktopOnly: cursor.desktop_only !== false,
+			defaultCursor: cursor.default_cursor || '/img/cursor-default.svg',
+			pointerCursor: cursor.pointer_cursor || '/img/cursor-pointer.svg',
+			trailCount: Number(cursor.trail_count || 10),
+			trailSize: Number(cursor.trail_size || 12),
+			trailColor: cursor.trail_color || 'rgba(255,255,255,0.72)',
+		},
+		snow: {
+			enabled: theme.show_lq_snow !== false,
+			count: Number(snow.count || 42),
+			speed: Number(snow.speed || 0.85),
+			maxSize: Number(snow.max_size || 3.2),
+			opacity: Number(snow.opacity || 0.78),
+			drift: Number(snow.drift || 0.32),
+		},
+	};
+	const effectsConfigJson = JSON.stringify(effectsConfig).replace(/</g, '\\u003c');
+%>
+<% if (loaderConfig.enabled && loaderConfig.mode === 'divergence') { %>
+	<%- include('loaders/lq-divergence-loader.ejs', { loaderConfig: loaderConfig }) %>
+<% } %>
+<% if (theme.show_lq_snow !== false) { %>
+	<canvas class="lq-snow-canvas" aria-hidden="true"></canvas>
+<% } %>
+<% if (theme.show_lq_cursor_fx !== false) { %>
+	<div class="lq-cursor-trail" aria-hidden="true"></div>
+<% } %>
+<script id="lq-loader-config" type="application/json"><%- JSON.stringify(loaderConfig).replace(/</g, '\\u003c') %></script>
+<script id="lq-effects-config" type="application/json"><%- effectsConfigJson %></script>

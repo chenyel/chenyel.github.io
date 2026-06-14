@@ -1,0 +1,35 @@
+<%
+	const meterDigits = Number(loaderConfig.meter && loaderConfig.meter.digits || 6);
+	const meterFrames = Array.from({ length: meterDigits });
+%>
+<div
+	id="lq-divergence-loader"
+	class="lq-divergence-loader"
+	data-loader-state="idle"
+	style="
+		--lq-loader-accent: <%= loaderConfig.palette.accent %>;
+		--lq-loader-accent-soft: <%= loaderConfig.palette.accent_soft %>;
+		--lq-loader-backdrop: <%= loaderConfig.palette.backdrop %>;
+		--lq-loader-line: <%= loaderConfig.palette.line %>;
+		--lq-loader-text: <%= loaderConfig.palette.text %>;
+	"
+>
+	<div class="lq-divergence-loader__backdrop"></div>
+	<div class="lq-divergence-loader__grid"></div>
+	<div class="lq-divergence-loader__scanline"></div>
+
+	<div class="lq-divergence-loader__panel">
+		<p class="lq-divergence-loader__brand"><%= loaderConfig.brand %></p>
+		<h2 class="lq-divergence-loader__title"><%= loaderConfig.title %></h2>
+
+		<div class="lq-divergence-loader__meter" role="img" aria-label="divergence meter">
+			<span class="lq-divergence-loader__digit lq-divergence-loader__digit--major">0</span>
+			<span class="lq-divergence-loader__digit lq-divergence-loader__digit--separator"><%= loaderConfig.meter.decimal_separator %></span>
+			<% meterFrames.forEach(function () { %>
+				<span class="lq-divergence-loader__digit">0</span>
+			<% }) %>
+		</div>
+
+		<p class="lq-divergence-loader__status"><%= loaderConfig.subtitle %></p>
+	</div>
+</div>

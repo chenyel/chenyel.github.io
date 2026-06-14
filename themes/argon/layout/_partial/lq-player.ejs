@@ -1,0 +1,77 @@
+<% const currentPost = typeof post !== 'undefined' ? post : null; %>
+<% const isMusicPage = is_page() && ((page && page.lq_music_page) || (currentPost && currentPost.lq_music_page)); %>
+<% if (theme.show_lq_player !== false && !isMusicPage) { %>
+	<%
+		const player = theme.lq_player || {};
+		const featuredPlaylist = Array.isArray(theme.music_featured_playlists) && theme.music_featured_playlists.length
+			? theme.music_featured_playlists[0]
+			: null;
+		const fallbackPlaylistId = player.playlist_id || player.playlistId || theme.music_page_fallback_playlist_id || (featuredPlaylist && featuredPlaylist.id) || '';
+		const playlistApiBase = theme.music_api_base_url || theme.music_api_base || '';
+		const fallbackTrack = {
+			title: player.title || '欢迎回家',
+			artist: player.artist || 'C x l',
+			cover: player.cover || '/img/nav_logo.png',
+			audio: player.audio || ''
+		};
+		const playlist = [];
+		if (Array.isArray(player.playlist)) {
+			player.playlist.forEach(track => {
+				if (track && track.audio) {
+					playlist.push({
+						title: track.title || fallbackTrack.title,
+						artist: track.artist || fallbackTrack.artist,
+						cover: track.cover || fallbackTrack.cover,
+						audio: track.audio
+					});
+				}
+			});
+		}
+		if (!playlist.length && fallbackTrack.audio) {
+			playlist.push(fallbackTrack);
+		}
+		const hasAudio = playlist.length > 0;
+		const hasPlaylistFallback = !hasAudio && Boolean(fallbackPlaylistId);
+		const activeTrack = hasAudio ? playlist[0] : fallbackTrack;
+	%>
+	<div
+		class="lq-player is-collapsed <%= hasAudio ? 'is-ready' : (hasPlaylistFallback ? 'is-loading' : 'is-empty') %>"
+		data-playlist='<%= JSON.stringify(playlist) %>'
+		data-playlist-id="<%= fallbackPlaylistId %>"
+		data-playlist-api-base="<%= playlistApiBase %>"
+		data-autoplay="<%= player.autoplay ? 'true' : 'false' %>"
+	>
+		<div class="lq-player-panel">
+			<div class="lq-player-cover">
+				<img src="<%= activeTrack.cover %>" alt="player cover">
+			</div>
+			<div class="lq-player-meta">
+				<div class="lq-player-title"><%= activeTrack.title %></div>
+				<div class="lq-player-artist"><%= activeTrack.artist %></div>
+				<div class="lq-player-status"><%= hasAudio ? '准备播放' : (hasPlaylistFallback ? '歌单载入中' : '添加音频地址后即可播放') %></div>
+			</div>
+			<audio class="lq-player-audio" preload="metadata"></audio>
+			<div class="lq-player-controls">
+				<div class="lq-player-buttons">
+					<button class="lq-player-prev" type="button" <%= playlist.length > 1 ? '' : 'disabled' %>>
+						<i class="fa fa-step-backward" aria-hidden="true"></i>
+					</button>
+					<button class="lq-player-play" type="button" <%= hasAudio ? '' : 'disabled' %>>
+						<i class="fa fa-play" aria-hidden="true"></i>
+					</button>
+					<button class="lq-player-next" type="button" <%= playlist.length > 1 ? '' : 'disabled' %>>
+						<i class="fa fa-step-forward" aria-hidden="true"></i>
+					</button>
+					<div class="lq-player-track-index"><%= hasAudio ? ('1 / ' + playlist.length) : '0 / 0' %></div>
+				</div>
+				<div class="lq-player-progress-wrap">
+					<input class="lq-player-progress" type="range" min="0" max="100" value="0" <%= hasAudio ? '' : 'disabled' %>>
+					<div class="lq-player-time">00:00 / 00:00</div>
+				</div>
+			</div>
+		</div>
+		<button class="lq-player-toggle" type="button" aria-label="展开播放器">
+			<i class="fa fa-angle-right lq-player-toggle__icon" aria-hidden="true"></i>
+		</button>
+	</div>
+<% } %>

@@ -1,0 +1,56 @@
+<%- include('header.ejs') %>
+<% const isTagLanding = is_page() && page && page.path === 'tags/index.html'; %>
+<% const currentPost = typeof post !== 'undefined' ? post : null; %>
+<% const isMusicPage = is_page() && ((page && page.lq_music_page) || (currentPost && currentPost.lq_music_page)); %>
+<% const isTechMapPage = is_page() && ((page && page.lq_tech_map_page) || (currentPost && currentPost.lq_tech_map_page)); %>
+
+<div id="lq-page-shell" class="<%= is_home() ? 'lq-home-shell' : 'lq-shell-wrap' %> <%= isTagLanding ? 'lq-page-shell--tag-tree' : '' %> <%= isMusicPage ? 'lq-page-shell--music' : '' %> <%= isTechMapPage ? 'lq-page-shell--tech-map' : '' %>">
+	<div class="lq-shell <%= isTagLanding ? 'lq-shell--tag-tree' : '' %> <%= isMusicPage ? 'lq-shell--music' : '' %> <%= isTechMapPage ? 'lq-shell--tech-map' : '' %>">
+		<% if (!isMusicPage && !isTechMapPage) { %>
+		<div class="lq-left-column">
+			<%- include('sidebar.ejs') %>
+		</div>
+		<% } %>
+		<div class="lq-main-column">
+			<div class="page-information-card-container">
+				<% if (is_tag() || is_category() || (is_archive() && page.year != undefined)) { %>
+					<%- include('information-card.ejs') %>
+				<% } %>
+			</div>
+
+			<div id="primary" class="content-area lq-content-area">
+				<main id="main" class="site-main lq-main" role="main">
+					<% if (isTagLanding) { %>
+						<%- include('_partial/tag-tree-page.ejs') %>
+					<% } %>
+					<% if (is_home()) { %>
+						<%- include('index.ejs') %>
+					<% } %>
+					<% if (!isTagLanding && (is_post() || is_page())) { %>
+						<%- include('post.ejs') %>
+					<% } %>
+					<% if (is_archive()) { 
+						if (page.year != undefined){ %>
+							<%- include('index.ejs') %>
+						<%} else {%>
+							<%- include('archive.ejs') %>
+					<% 	}
+					} %>
+					<% if (is_tag()) { %>
+						<%- include('index.ejs') %>
+					<% } %>
+					<% if (is_category()) { %>
+						<%- include('index.ejs') %>
+					<% } %>
+				</main>
+			</div>
+		</div>
+		<% if (!isMusicPage && !isTechMapPage) { %>
+		<div class="lq-right-column">
+			<%- include('_partial/lq-rightbar.ejs') %>
+		</div>
+		<% } %>
+	</div>
+</div>
+
+<%- include('footer.ejs') %>
